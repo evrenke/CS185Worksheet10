@@ -1,0 +1,75 @@
+Script started on 2021-12-03 05:01:11+00:00 [TERM="xterm" TTY="/dev/pts/0" COLUMNS="236" LINES="31"]
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ ./numbers.shfg[K./numbers.sh[K./numbers.sht./numbers.shi./numbers.shm./numbers.she./numbers.sh ./numbers.sh
+min 0
+max 15835
+avg 9.33468
+
+real	0m25.437s
+user	0m23.090s
+sys	0m3.932s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time ./numbers.sh
+min 0
+max 15835
+avg 9.33468
+
+real	0m25.447s
+user	0m22.968s
+sys	0m4.056s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time ./numbers.sh
+min 0
+max 15835
+avg 9.33468
+
+real	0m25.025s
+user	0m23.057s
+sys	0m4.351s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time ./numbers.sh
+min 0
+max 15835
+avg 9.33468
+
+real	0m25.288s
+user	0m23.129s
+sys	0m4.120s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time ./numbers.sh
+min 0
+max 15835
+avg 9.33468
+
+real	0m54.622s
+user	0m23.179s
+sys	0m4.926s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time python3 numbers.py 
+min 0 max 15835 avg 9.33467921636312
+
+real	0m22.337s
+user	0m10.886s
+sys	0m4.902s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time python3 numbers.py 
+min 0 max 15835 avg 9.33467921636312
+
+real	0m25.858s
+user	0m10.622s
+sys	0m6.237s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time python3 numbers.py 
+min 0 max 15835 avg 9.33467921636312
+
+real	0m27.404s
+user	0m10.975s
+sys	0m7.402s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time python3 numbers.py 
+min 0 max 15835 avg 9.33467921636312
+
+real	0m24.516s
+user	0m10.795s
+sys	0m6.724s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ time python3 numbers.py 
+min 0 max 15835 avg 9.33467921636312
+
+real	2m13.373s
+user	0m10.932s
+sys	0m3.539s
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ history > cmds.log
+]0;keskin@f6linux6: ~keskin@f6linux6:~$ exit
+
+Script done on 2021-12-03 05:08:21+00:00 [COMMAND_EXIT_CODE="0"]
