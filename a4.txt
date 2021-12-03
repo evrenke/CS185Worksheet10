@@ -1,64 +1,0 @@
-Script started on 2021-11-28 11:09:29+00:00 [TERM="xterm" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ cut -f 3,9 amazon_reviews_us_Books_v1_02.tsv | sort -nk2 | head -n 100 | awk '{print $1}' > reviewIDs.txt
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ input="reviewIDs.txt"; while read -r line; do awk -F"\t" -v "ID=$line" '$3 == ID' amazon_reviews_us_Books_v1_02.tsv > "REVIEWS/$line.txt"; done < "$input"
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ for FILE in REVIEWS/*.txt; do cut -f 14 "$FILE" | sed -e 's/ing[[:blank:]]/ /g;s/ed[[:blank:]]/ /g;s/[Ss][[:blank:]]/ /g' > "$FILE.temp" ; mv "$FILE.temp" "$FILE" ;  done
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ for FILE in REVIEWS/*.txt; do sed -e 's/,//g;s/\.//g;s/\;//g;s/\x27//g;s/\!//g;s/\://g;s/\"//g;s/\?//g;s/\///g;s/\\//g;s/'\{'//g;s/'\}'//g;s/\[//g;s/\]//g;s/\|//g;s/\<//g;s/\>//g;s/\~//g;s/\`//g;s/@//g;s/\#//g;s/\$//g;s/%//g;s/\^//g;s/\&//g;s/\*//g;s/(//g;s/)//g;s/-//g;s/_//g;s/=//g;s/+//g' "$FILE" > "$FILE.temp" ; mv "$FILE.temp" "$FILE" ;  done
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ for FILE in REVIEWS/*.txt; do sed -e 's/\<.\>//g;s/\<..\>//g' "$FILE" | sed 's/\<about\>//g;s/\<actually\>//g;s/\<almost\>//g;s/\<also\>//g;s/\<although\>//g;s/\<always\>//g;s/\<and\>//g;s/\<any\>//g;s/\<are\>//g;s/\<became\>//g;s/\<become\>//g;s/\<but\>//g;s/\<can\>//g;s/\<could\>//g;s/\<did\>//g;s/\<does\>//g;s/\<each\>//g;s/\<either\>//g;s/\<else\>//g;s/\<for\>//g;s/\<from\>//g;s/\<had\>//g;s/\<has\>//g;s/\<have\>//g;s/\<hence\>//g;s/\<how\>//g;s/\<its\>//g;s/\<may\>//g;s/\<maybe\>//g;s/\<might\>//g;s/\<mine\>//g;s/\<must\>//g;s/\<neither\>//g;s/\<nor\>//g;s/\<not\>//g;s/\<when\>//g;s/\<where\>//g;s/\<wherea\>//g;s/\<wherever\>//g;s/\<whenever\>//g;s/\<whether\>//g;s/\<which\>//g;s/\<while\>//g;s/\<who\>//g;s/\<whom\>//g;s/\<whoever\>//g;s/\<whose\>//g;s/\<why\>//g;s/\<will\>//g;s/\<with\>//g;s/\<within\>//g;s/\<without\>//g;s/\<would\>//g;s/\<yes\>//g;s/\<yet\>//g;s/\<you\>//g;s/\<your\>//g;s/\<the\>//g;s/\<thi\>//g' > "$FILE.temp" ; mv "$FILE.temp" "$FILE" ; done
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ rm commonTweets.sh
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ nano commonTweets.sh
-[?2004h[?1049h[22;0;0t[1;24r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[22;35H(B[0;7m[ New File ](B[m[H(B[0;7m  GNU nano 4.8                    commonTweets.sh                               [1;79H(B[m[23d(B[0;7m^G(B[m Get Help  (B[0;7m^O(B[m Write Out (B[0;7m^W(B[m Where Is  (B[0;7m^K(B[m Cut Text  (B[0;7m^J(B[m Justify   (B[0;7m^C(B[m Cur Pos[24d(B[0;7m^X(B[m Exit[14G(B[0;7m^R(B[m Read File (B[0;7m^\(B[m Replace   (B[0;7m^U(B[m Paste Text(B[0;7m^T(B[m To Spell  (B[0;7m^_(B[m Go To Line[22d[2d[39;49m(B[m[?12l[?25h[?25l[22d[K[1;71H(B[0;7mModified(B[m[2d[36m#!/bin/bash[3d[39m(B[mREVIEW[32m=$((B[0;1m[34msed[39m(B[m (B[0;1m[33m's/\s\+/\n/g'[39m(B[m (B[0;1m[33m"$1"[39m(B[m [32m|[39m(B[m (B[0;1m[34msort[39m(B[m [32m)[4d(B[0;1m[34mecho[39m(B[m (B[0;1m[33m"Tweet check started"[5d[39m(B[mMINIMUM_COMMON_WORDS[32m=[39m(B[m2[6dTWEETS_USED[32m=[39m(B[m30[7d[32mwhile[39m(B[m IFS[32m=[39m(B[m, [32mread(B[0;1m[35m -r[39m(B[m c1 c2 c3 c4 c5 c6[32m;[39m(B[m [32mdo[8;7H[39m(B[mCLEAN_TWEET[32m=$((B[0;1m[34mecho[39m(B[m (B[0;1m[33m"$c6"[39m(B[m [32m|[39m(B[m (B[0;1m[34mcat[39m(B[m [32m|[39m(B[m (B[0;1m[34msed[35m -e[39m(B[m (B[0;1m[33m's/ing[[:blank:]]/ /g;s/ed[[:blan[39m(B[0;7m>[9;7H(B[mFOUND[32m=$([39m(B[m [32m([39m(B[mcomm -12 [32m<((B[0;1m[34mecho[39m(B[m (B[0;1m[33m"$REVIEW"(B[0m[32m)[39m(B[m  [32m<((B[0;1m[34mecho[39m(B[m (B[0;1m[33m"$CLEAN_TWEET"[39m(B[m [32m|[39m(B[m (B[0;1m[34msed[39m(B[m (B[0;1m[33m's/\s\+[39m(B[0;7m>[10;7H(B[0m[32mif[39m(B[m [32m[[39m(B[m (B[0;1m[33m"$FOUND"[39m(B[m [32m-ge[39m(B[m (B[0;1m[33m"$MINIMUM_COMMON_WORDS"[39m(B[m [32m];[11;7Hthen[39m(B[m (B[0;1m[34mecho[39m(B[m (B[0;1m[33m"$CLEAN_TWEET"[39m(B[m [32m|[39m(B[m (B[0;1m[34msed[39m(B[m (B[0;1m[33m's/\s\+/ /g'[39m(B[m [32m|[39m(B[m (B[0;1m[34msort[35m -t[33m' '(B[0m[32m|[39m(B[m (B[0;1m[34mcat[39m(B[m [32m>>[39m(B[m (B[0;1m[33m"$1"[12;7H(B[0m[32mfi[13ddone[39m(B[m [32m<[39m(B[m [32m<((B[0;1m[34mhead[35m -n[39m(B[m (B[0;1m[31m$TWEETS_USED[39m(B[m (B[0;1m[33m"$2"(B[0m[32m)[39m(B[m[?12l[?25h[?25l[22d(B[0;7mSave modified buffer?                                                           [23;1H Y(B[m Yes[K[24d(B[0;7m N(B[m No  [14G   (B[0;7m^C(B[m Cancel[K[22;23H[?12l[?25h[?25l[23d(B[0;7m^G(B[m Get Help[23;21H(B[0;7mM-D(B[m DOS Format[41G(B[0;7mM-A(B[m Append[23;61H(B[0;7mM-B(B[m Backup File[24d(B[0;7m^C(B[m Cancel[17G    (B[0;7mM-M(B[m Mac Format[41G(B[0;7mM-P(B[m Prepend[24;61H(B[0;7m^T(B[m To Files[22d(B[0;7mFile Name to Write: commonTweets.sh(B[m[22;36H[?12l[?25h[?25l[1K (B[0;7m[ Writing... ](B[m[K[1;71H(B[0;7m        (B[m[22;32H(B[0;7m[ Wrote 12 lines ](B[m[J[24d[?12l[?25h[24;1H[?1049l[23;0;0t[?1l>[?2004l]0;keskin@f6linux6: ~keskin@f6linux6:~$ chmod +x commonTweets.sh
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ cp REVIEWS/R100HYLFOO4XDG.txt testreview.txt
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ time ./commonTweets.sh testreview.txt training.1600000.processed.noemoticon.csv
-Tweet check started
-./commonTweets.sh: line 10: unexpected EOF while looking for matching `''
-./commonTweets.sh: line 13: syntax error: unexpected end of file
-
-real	0m0.006s
-user	0m0.003s
-sys	0m0.002s
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ rm commonTweets.sh
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ nano commonTweets.sh
-[?2004h[?1049h[22;0;0t[1;24r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[22;35H(B[0;7m[ New File ](B[m[H(B[0;7m  GNU nano 4.8                    commonTweets.sh                               [1;79H(B[m[23d(B[0;7m^G(B[m Get Help  (B[0;7m^O(B[m Write Out (B[0;7m^W(B[m Where Is  (B[0;7m^K(B[m Cut Text  (B[0;7m^J(B[m Justify   (B[0;7m^C(B[m Cur Pos[24d(B[0;7m^X(B[m Exit[14G(B[0;7m^R(B[m Read File (B[0;7m^\(B[m Replace   (B[0;7m^U(B[m Paste Text(B[0;7m^T(B[m To Spell  (B[0;7m^_(B[m Go To Line[22d[2d[39;49m(B[m[?12l[?25h[?25l[22d[K[1;71H(B[0;7mModified(B[m[2d[36m#!/bin/bash[3d[39m(B[mREVIEW[32m=$((B[0;1m[34msed[39m(B[m (B[0;1m[33m's/\s\+/\n/g'[39m(B[m (B[0;1m[33m"$1"[39m(B[m [32m|[39m(B[m (B[0;1m[34msort[39m(B[m [32m)[4d(B[0;1m[34mecho[39m(B[m (B[0;1m[33m"Tweet check started"[5d[39m(B[mMINIMUM_COMMON_WORDS[32m=[39m(B[m2[6dTWEETS_USED[32m=[39m(B[m30[7d[32mwhile[39m(B[m IFS[32m=[39m(B[m, [32mread(B[0;1m[35m -r[39m(B[m c1 c2 c3 c4 c5 c6[32m;[39m(B[m [32mdo[8;7H[39m(B[mCLEAN_TWEET[32m=$((B[0;1m[34mecho[39m(B[m (B[0;1m[33m"$c6"[39m(B[m [32m|[39m(B[m (B[0;1m[34mcat[39m(B[m [32m|[39m(B[m (B[0;1m[34msed[35m -e[39m(B[m (B[0;1m[33m's/ing[[:blank:]]/ /g;s/ed[[:blan[39m(B[0;7m>[9;7H(B[mFOUND[32m=$([39m(B[m [32m([39m(B[mcomm -12 [32m<((B[0;1m[34mecho[39m(B[m (B[0;1m[33m"$REVIEW"(B[0m[32m)[39m(B[m  [32m<((B[0;1m[34mecho[39m(B[m (B[0;1m[33m"$CLEAN_TWEET"[39m(B[m [32m|[39m(B[m (B[0;1m[34msed[39m(B[m (B[0;1m[33m's/\s\+[39m(B[0;7m>[10;7H(B[0m[32mif[39m(B[m [32m[[39m(B[m (B[0;1m[33m"$FOUND"[39m(B[m [32m-ge[39m(B[m (B[0;1m[33m"$MINIMUM_COMMON_WORDS"[39m(B[m [32m];[11;7Hthen[39m(B[m (B[0;1m[34mecho[39m(B[m (B[0;1m[33m"$CLEAN_TWEET"[39m(B[m [32m|[39m(B[m (B[0;1m[34msed[39m(B[m (B[0;1m[33m's/\s\+/ /g'[39m(B[m [32m|[39m(B[m (B[0;1m[34msort[35m -t[33m' '(B[0m[32m|[39m(B[m (B[0;1m[34mcat[39m(B[m [32m>>[39m(B[m (B[0;1m[33m"$1"[12;7H(B[0m[32mfi[13ddone[39m(B[m [32m<[39m(B[m [32m<((B[0;1m[34mhead[35m -n[39m(B[m (B[0;1m[31m$TWEETS_USED[39m(B[m (B[0;1m[33m"$2"(B[0m[32m)[39m(B[m[?12l[?25h[?25l[22d(B[0;7mSave modified buffer?                                                           [23;1H Y(B[m Yes[K[24d(B[0;7m N(B[m No  [14G   (B[0;7m^C(B[m Cancel[K[22;23H[?12l[?25h[?25l[23d(B[0;7m^G(B[m Get Help[23;21H(B[0;7mM-D(B[m DOS Format[41G(B[0;7mM-A(B[m Append[23;61H(B[0;7mM-B(B[m Backup File[24d(B[0;7m^C(B[m Cancel[17G    (B[0;7mM-M(B[m Mac Format[41G(B[0;7mM-P(B[m Prepend[24;61H(B[0;7m^T(B[m To Files[22d(B[0;7mFile Name to Write: commonTweets.sh(B[m[22;36H[?12l[?25h[?25l[1K (B[0;7m[ Writing... ](B[m[K[1;71H(B[0;7m        (B[m[22;32H(B[0;7m[ Wrote 12 lines ](B[m[J[24d[?12l[?25h[24;1H[?1049l[23;0;0t[?1l>[?2004l]0;keskin@f6linux6: ~keskin@f6linux6:~$ chmod +x commonTweets.sh
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ cp REVIEWS/R100HYLFOO4XDG.txt testreview.txt
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ time ./commonTweets.sh testreview.txt training.1600000.processed.noemoticon.csv
-Tweet check started
-
-real	0m1.150s
-user	0m0.256s
-sys	0m1.400s
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ time find ./REVIEWS -type f -name "*.txt" | xargs -P 5 -I % ./commonTweets.sh % training.1600000.processed.noemoticon.csv
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-Tweet check started
-^C
-^C
-
-real	3m43.818s
-user	0m1.910s
-sys	3m30.839s
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ ^C
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ for FILE in REVIEWS/*.txt; do sed "1 d" "$FILE" | sed 's/\<.\>//g;s/\<..\>//g' | sed 's/\<about\>//g;s/\<actually\>//g;s/\<almost\>//g;s/\<also\>//g;s/\<although\>//g;s/\<always\>//g;s/\<and\>//g;s/\<any\>//g;s/\<are\>//g;s/\<became\>//g;s/\<become\>//g;s/\<but\>//g;s/\<can\>//g;s/\<could\>//g;s/\<did\>//g;s/\<does\>//g;s/\<each\>//g;s/\<either\>//g;s/\<else\>//g;s/\<for\>//g;s/\<from\>//g;s/\<had\>//g;s/\<has\>//g;s/\<have\>//g;s/\<hence\>//g;s/\<how\>//g;s/\<its\>//g;s/\<may\>//g;s/\<maybe\>//g;s/\<might\>//g;s/\<mine\>//g;s/\<must\>//g;s/\<neither\>//g;s/\<nor\>//g;s/\<not\>//g;s/\<when\>//g;s/\<where\>//g;s/\<wherea\>//g;s/\<wherever\>//g;s/\<whenever\>//g;s/\<whether\>//g;s/\<which\>//g;s/\<while\>//g;s/\<who\>//g;s/\<whom\>//g;s/\<whoever\>//g;s/\<whose\>//g;s/\<why\>//g;s/\<will\>//g;s/\<with\>//g;s/\<within\>//g;s/\<without\>//g;s/\<would\>//g;s/\<yes\>//g;s/\<yet\>//g;s/\<you\>//g;s/\<your\>//g;s/\<the\>//g;s/\<thi\>//g'| sed 's/\s\+/\n/g' | sort -r | uniq -c | sort -nrk 1 | head -n 11 | tail -n 10 > "$FILE.top10" ;  done
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ cut -f 3,9 amazon_reviews_us_Books_v1_02.tsv | sort -nk2 | tail -n 100 | awk '{print $1}' > reviewIDs.txt
-^C
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ ^C
-
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ 
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ ^C
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ history > m[Kcmds.log
-]0;keskin@f6linux6: ~keskin@f6linux6:~$ exit
-
-Script done on 2021-11-28 11:47:35+00:00 [COMMAND_EXIT_CODE="0"]
